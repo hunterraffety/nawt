@@ -8,7 +8,9 @@ import TextInput from "./TextInput";
 
 const PaymentUpdater = () => {
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
-  const [selectedPayment, setSelectedPayment] = useState<PaymentMethod | null>(null);
+  const [selectedPayment, setSelectedPayment] = useState<PaymentMethod | null>(
+    null,
+  );
   const [expirationDate, setExpirationDate] = useState<string>("");
   const [updateAll, setUpdateAll] = useState<boolean>(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -55,12 +57,13 @@ const PaymentUpdater = () => {
       setSuccessMessage("✅ Payment method updated successfully!");
 
       // update the ui
-      setPaymentMethods(prev =>
-        prev.map(pm =>
-          updateAll || pm.id === selectedPayment?.id ? { ...pm, exp: expirationDate } : pm
-        )
+      setPaymentMethods((prev) =>
+        prev.map((pm) =>
+          updateAll || pm.id === selectedPayment?.id
+            ? { ...pm, exp: expirationDate }
+            : pm,
+        ),
       );
-
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
@@ -87,10 +90,14 @@ const PaymentUpdater = () => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto p-8 bg-[#0A0A0A] text-white rounded-lg shadow-lg border border-gray-800">
-      <h2 className="text-xl font-semibold mb-4 text-gray-100">Select Payment Method</h2>
+      <h2 className="text-xl font-semibold mb-4 text-gray-100">
+        Select Payment Method
+      </h2>
 
       {error && <p className="text-red-400 mb-2">{error}</p>}
-      {successMessage && <p className="text-green-400 mb-2">{successMessage}</p>}
+      {successMessage && (
+        <p className="text-green-400 mb-2">{successMessage}</p>
+      )}
       {/* select component */}
       <Select
         label="Payment Method"
@@ -123,7 +130,7 @@ const PaymentUpdater = () => {
           type="checkbox"
           id="updateAll"
           checked={updateAll}
-          onChange={() => setUpdateAll(prev => !prev)}
+          onChange={() => setUpdateAll((prev) => !prev)}
           className="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500"
         />
         <label htmlFor="updateAll" className="ml-2 text-sm text-gray-300">
@@ -135,7 +142,9 @@ const PaymentUpdater = () => {
         <Button
           label="Update Payment"
           onClick={() => handleUpdatePayment(false)}
-          disabled={!selectedPayment && !updateAll || expirationDate.length !== 5}
+          disabled={
+            (!selectedPayment && !updateAll) || expirationDate.length !== 5
+          }
         />
         <Button
           label="Simulate Error"
@@ -153,7 +162,8 @@ const PaymentUpdater = () => {
       />
 
       <p className="mt-4 text-gray-400 text-sm text-center">
-        Built with <span className="text-gray-300">TypeScript, Next.js</span>, and a little bit of magic ✨.
+        Built with <span className="text-gray-300">TypeScript, Next.js</span>,
+        and a little bit of magic ✨.
         {/* let's work together! */}
       </p>
     </div>

@@ -1,36 +1,145 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# **Knot Payment Updater** 💳
 
-## Getting Started
+A **Next.js** and **TypeScript** project that simulates a real-world payment method update interface. This app allows users to select a payment method, update the expiration date, and handle errors seamlessly. Built with **React, TailwindCSS, and Vercel for deployment**, this project follows best practices to showcase clean and efficient UI/UX design.
 
-First, run the development server:
+## **🚀 Features**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Select a payment method** from a dynamically loaded list
+- **Update the expiration date** with auto-formatting (MM/YY)
+- **Simulate API errors** to test failure scenarios
+- **Option to update all payment methods** on file
+- **Dark-mode friendly UI**, styled to match Knot’s website
+- **Fully responsive design**, works on all screen sizes
+- **Deployable to Vercel in one click**
+
+---
+
+## **🛠 Tech Stack**
+
+- **Next.js** – React framework for server-side rendering (SSR)
+- **TypeScript** – Strongly typed JavaScript
+- **TailwindCSS** – Modern styling with utility-first approach
+- **Vercel** – Instant and scalable deployments
+- **React Hooks** – Efficient state management
+
+---
+
+## **📥 Installation & Setup**
+
+### **1️⃣ Clone the Repository**
+
+```sh
+git clone https://github.com/hunterraffety/knot-payment-updater.git
+cd knot-payment-updater
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### **2️⃣ Install Dependencies**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm install  # or yarn install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### **3️⃣ Run the Development Server**
 
-## Learn More
+```sh
+npm run dev  # or yarn dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+- Open **http://localhost:3000** in your browser.
+- The app should be running locally.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## **🔗 API Endpoints**
 
-## Deploy on Vercel
+The project includes a mock API to simulate updating payment methods.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### **GET `/api/updatePayment`**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📥 **Fetches available payment methods.**
+
+```json
+{
+  "success": true,
+  "paymentMethods": [
+    { "id": "1", "last4": "1234", "type": "Visa", "exp": "12/25" },
+    { "id": "2", "last4": "5678", "type": "Amex", "exp": "12/26" }
+  ]
+}
+```
+
+### **POST `/api/updatePayment`**
+
+📤 **Updates a payment method expiration date.**
+
+#### **Request Body:**
+
+```json
+{
+  "paymentId": "1",
+  "newExpiration": "12/30",
+  "simulateError": false
+}
+```
+
+#### **Response:**
+
+- ✅ **Success:**
+
+```json
+{
+  "success": true,
+  "message": "Payment Method Updated Successfully!"
+}
+```
+
+- ❌ **Failure (Simulated Error):**
+
+```json
+{
+  "success": false,
+  "message": "Internal Server Error! Simulated Failure"
+}
+```
+
+---
+
+## **🚀 Deploy to Vercel**
+
+### **1️⃣ Install Vercel CLI (If not installed)**
+
+```sh
+npm install -g vercel
+```
+
+### **2️⃣ Log into Vercel**
+
+```sh
+vercel login
+```
+
+### **3️⃣ Deploy the App**
+
+```sh
+vercel --prod
+```
+
+Vercel will provide you with a **live deployment link!** 🎉
+
+---
+
+## **📸 Screenshots**
+
+| Payment Selection                                                                | Error Handling                                                             |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| ![Payment Selection](https://via.placeholder.com/500x300?text=Payment+Selection) | ![Error Handling](https://via.placeholder.com/500x300?text=Error+Handling) |
+
+---
+
+## **👨‍💻 Author & Contact**
+
+- **Hunter Raffety**
+- [LinkedIn](https://linkedin.com/in/huntersraffety)
+- [GitHub](https://github.com/hunterraffety)
+
+🚀 **Built with TypeScript, Next.js, and a little bit of magic ✨.**
